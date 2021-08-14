@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const [playerName, setPlayerName] = useState("");
+
   return (
     <div className="bg-gray-900 flex">
-      <p className="text-3xl text-green-300 py-5 pl-20 pr-20 align-top">
+      <p className="text-3xl text-green-300 py-5 pl-20 pr-20">
         PUBG Game Recap
       </p>
-      <Link to="/" className="text-green-300 align-top p-7">
+      <Link to="/" className="text-green-300 p-7">
         Matches
       </Link>
-      <Link to="/graph" className="text-green-300 align-top p-7">
+      <Link to="/graph" className="text-green-300 p-7">
         Graph
       </Link>
       <input
