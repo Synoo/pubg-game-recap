@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const Matches = () => {
@@ -9,7 +10,7 @@ const Matches = () => {
   const [rosterNames, setRosterNames] = useState([]);
   const [timeSurvived, setTimeSurvived] = useState("");
   const [winPlace, setWinPlace] = useState("");
-  const [name, setName] = useState("");
+  const { playerName } = useParams();
 
   const headers = {
     Accept: "application/vnd.api+json",
@@ -18,8 +19,9 @@ const Matches = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setRosterNames([]);
       const result = await axios(
-        "https://api.pubg.com/shards/steam/players?filter[playerNames]=Synoo",
+        `https://api.pubg.com/shards/steam/players?filter[playerNames]=${playerName}`,
         { headers }
       );
 
@@ -39,7 +41,6 @@ const Matches = () => {
             setDamage(z.attributes.stats.damageDealt);
             setTimeSurvived(z.attributes.stats.timeSurvived);
             setWinPlace(z.attributes.stats.winPlace);
-            setName(z.attributes.stats.name);
             rosterId = z.id;
           }
         }
@@ -72,13 +73,14 @@ const Matches = () => {
 
       setMatch(match.data);
     };
-
-    fetchData();
-  }, []);
+    if (playerName) {
+      fetchData();
+    }
+  }, [playerName]);
 
   return (
     <div className="bg-gray-800 min-h-screen p-5">
-      {match.data && (
+      {playerName && match.data ? (
         <>
           <div className="bg-gray-900 text-green-300 p-5 rounded-xl mb-5 flex justify-between">
             <div>
@@ -94,7 +96,7 @@ const Matches = () => {
             </div>
             <div className="flex flex-col">
               <p className="font-bold">Roster</p>
-              <p>{name}</p>
+              <p>{playerName}</p>
               {rosterNames.map((r) => {
                 return <p key={r.name}>{r}</p>;
               })}
@@ -122,6 +124,8 @@ const Matches = () => {
             </div>
           </div>
         </>
+      ) : (
+        <p className="text-green-300">Enter PUBG Username in the search bar</p>
       )}
     </div>
   );

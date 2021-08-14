@@ -9,6 +9,7 @@ function App() {
       <Header />
       <Switch>
         <Route exactly component={Graph} path="/graph" />
+        <Route exactly component={Matches} path="/:playerName" />
         <Route exactly component={Matches} path="/" />
       </Switch>
     </Router>
