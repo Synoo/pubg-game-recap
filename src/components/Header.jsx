@@ -9,7 +9,7 @@ const Header = () => {
   const onEnter = async (e) => {
     if (e.key === "Enter") {
       if (playerName) {
-        await axios(`/api/${playerName}`);
+        await axios(`/api/players/${playerName}`);
       }
 
       history.push(`/${playerName}`);

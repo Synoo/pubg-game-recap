@@ -8,7 +8,7 @@ const Matches = () => {
 
   useEffect(async () => {
     if (playerName) {
-      await axios(`/api/test/${playerName}`).then((data) => {
+      await axios(`/api/matches/${playerName}`).then((data) => {
         setPlayerData(data.data);
       });
     }
