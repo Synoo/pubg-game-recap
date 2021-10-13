@@ -41,7 +41,7 @@ const Matches = () => {
                 {match.rosterNames && (
                   <>
                     {match.rosterNames.map((r) => {
-                      return <p key={r.name}>{r}</p>;
+                      return <p key={r}>{r}</p>;
                     })}
                   </>
                 )}
