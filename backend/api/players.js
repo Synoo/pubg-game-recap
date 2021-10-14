@@ -1,5 +1,6 @@
 const db = require("../firebase");
 const axios = require("axios");
+const _ = require("lodash");
 require("dotenv").config();
 
 const headers = {
@@ -24,9 +25,11 @@ exports.get = async (req, res) => {
       const playerId = result.data.data[0].id;
       const matchesData = await getMatchesData(matchesIds, playerId);
 
+      const orderedMatchesData = _.orderBy(matchesData, "createdAt", "desc");
+
       const playerData = {
         playerName: req.params.playerName,
-        matches: matchesData,
+        matches: orderedMatchesData,
       };
 
       db.collection("players")
@@ -55,8 +58,10 @@ exports.get = async (req, res) => {
 
       const newMatches = [...dbMatches, ...matchesData];
 
+      const orderedMatchesData = _.orderBy(newMatches, "createdAt", "desc");
+
       await playerRef
-        .update({ matches: newMatches })
+        .update({ matches: orderedMatchesData })
         .then(() => {
           res.status(200).send("Player successfully updated!");
         })

@@ -8,10 +8,10 @@ exports.list = async (req, res) => {
       if (doc.exists) {
         res.json(doc.data());
       } else {
-        res.status(404).send(`No document with name: ${req.params.playerName}`);
+        res.status(404).send(`No matches with name: ${req.params.playerName}`);
       }
     })
     .catch((error) => {
-      res.status(500).send("Error getting document: ", error);
+      res.status(500).send("Error getting matches data: ", error);
     });
 };
