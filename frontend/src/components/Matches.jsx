@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import moment from "moment";
 
 const Matches = () => {
   const [playerData, setPlayerData] = useState({ matches: [] });
   const { playerName } = useParams();
+
+  const MAP_SWITCH = {
+    Baltic_Main: "Erangel",
+    Chimera_Main: "Paramo",
+    Desert_Main: "Miramar",
+    DihorOtok_Main: "Vikendi",
+    Erangel_Main: "Erangel",
+    Heaven_Main: "Haven",
+    Range_Main: "Camp Jackal",
+    Savage_Main: "Sanhok",
+    Summerland_Main: "Karakin",
+    Tiger_Main: "Taego",
+  };
 
   useEffect(async () => {
     if (playerName) {
@@ -24,16 +38,22 @@ const Matches = () => {
               key={match.id}
             >
               <div>
-                <p>Date: {match.createdAt}</p>
-                <p>Survival Time: {match.timeSurvived}</p>
-                <p>Match Type: {match.matchType}</p>
-                <p>Map: {match.mapName}</p>
+                <p>
+                  Date:{" "}
+                  {moment(match.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
+                </p>
+                <p>
+                  Survival Time:{" "}
+                  {moment.utc(match.timeSurvived * 1000).format("mm:ss")}
+                </p>
+                <p className="capitalize">Match Type: {match.matchType}</p>
+                <p>Map: {MAP_SWITCH[match.mapName]}</p>
               </div>
               <div>
                 <p>Placement: {match.winPlace}</p>
                 <p>Kills: {match.kills}</p>
                 <p>Assists: {match.assists}</p>
-                <p>Damage: {match.damage}</p>
+                <p>Damage: {match.damage.toFixed(2)}</p>
               </div>
               <div className="flex flex-col">
                 <p className="font-bold">Roster</p>
