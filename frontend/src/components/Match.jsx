@@ -2,6 +2,8 @@ import React from "react";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MAP_SWITCH = {
   Baltic_Main: "Erangel",
@@ -53,22 +55,120 @@ const Match = ({ match, playerName, onToast }) => {
           </>
         )}
       </div>
-      <form key={match.id} onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col">
-          Bad Driving: <input type="checkbox" {...register(`bad_driving`)} />
-          Bad Rotation: <input type="checkbox" {...register(`bad_rotation`)} />
-          Bad Aim: <input type="checkbox" {...register(`bad_aim`)} />
-          Bad Movement: <input type="checkbox" {...register(`bad_movement`)} />
-          Bad Position: <input type="checkbox" {...register(`bad_position`)} />
-          Too Aggressive: <input type="checkbox" {...register(`aggressive`)} />
-          Too Passive: <input type="checkbox" {...register(`passive`)} />
-          Flushing: <input type="checkbox" {...register(`flushing`)} />
-          Hardpeek: <input type="checkbox" {...register(`hardpeek`)} />
-          Communication:{" "}
-          <input type="checkbox" {...register(`communication`)} />
-          <textarea placeholder={"Add Comment"} {...register(`comment`)} />
+      <form className="flex" key={match.id} onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col mr-10">
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`driving`)}
+            />
+            Driving
+          </div>
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`rotation`)}
+            />
+            Rotation
+          </div>
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`aim`)}
+            />
+            Aim
+          </div>
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`movement`)}
+            />
+            Movement
+          </div>
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`position`)}
+            />
+            Position
+          </div>
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`parachute`)}
+            />
+            Parachute
+          </div>
         </div>
-        <input key={match.id} type="submit" />
+        <div className="flex flex-col mr-10">
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`aggressive`)}
+            />
+            Aggressive
+          </div>
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`passive`)}
+            />
+            Passive
+          </div>
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`flushing`)}
+            />
+            Flushing
+          </div>
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`hardpeek`)}
+            />
+            Hardpeek
+          </div>
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`communication`)}
+            />
+            Communication
+          </div>
+          <div className="inline-flex items-center">
+            <input
+              className="mr-3 h-4 w-4"
+              type="checkbox"
+              {...register(`utility`)}
+            />
+            Utility
+          </div>
+        </div>
+
+        <div className="flex flex-col mr-10">
+          <textarea
+            className="bg-gray-800 rounded-xl resize-none placeholder-green-300 placeholder-opacity-40 p-2 h-full  outline-none"
+            placeholder={"Add Comment"}
+            {...register(`comment`)}
+          />
+        </div>
+        <div className="flex flex-col">
+          <button className="m-auto" key={match.id} type="submit">
+            <FontAwesomeIcon className="text-3xl" icon={faSave} />
+          </button>
+        </div>
       </form>
     </div>
   );
