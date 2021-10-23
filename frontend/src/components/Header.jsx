@@ -24,7 +24,7 @@ const Header = () => {
       <Link to={`/${playerName}`} className="text-green-300 p-7">
         Matches
       </Link>
-      <Link to="/graph" className="text-green-300 p-7">
+      <Link to={`/graph/${playerName}`} className="text-green-300 p-7">
         Graph
       </Link>
       <input

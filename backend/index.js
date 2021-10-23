@@ -13,6 +13,7 @@ app.use(express.urlencoded());
 
 app.get("/api/players/:playerName", players.get);
 app.get("/api/matches/:playerName", matches.list);
+app.get("/api/matches/:playerName/:limit", matches.filteredList);
 app.put("/api/matches/:playerName/:matchId", matches.update);
 
 app.listen(PORT, () => {
