@@ -12,7 +12,14 @@ const Header = () => {
         await axios(`/api/players/${playerName}`);
       }
 
-      history.push(`/${playerName}`);
+      const pathName = history.location.pathname;
+      const substrPathName = pathName.substr(0, pathName.lastIndexOf("/"));
+
+      if (substrPathName) {
+        history.push(`/graph/${playerName}`);
+      } else {
+        history.push(`/${playerName}`);
+      }
     }
   };
 
