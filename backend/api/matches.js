@@ -23,7 +23,12 @@ exports.filteredList = async (req, res) => {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        const filteredList = doc.data().matches.slice(0, req.params.limit);
+        let filteredList;
+        if (req.params.limit === "all") {
+          filteredList = doc.data().matches;
+        } else {
+          filteredList = doc.data().matches.slice(0, req.params.limit);
+        }
 
         const aim = [];
         const driving = [];

@@ -18,7 +18,11 @@ import {
 const Graph = () => {
   const [graphData, setGraphData] = useState();
   const [comments, setComments] = useState();
+  const [limit, setLimit] = useState(10);
   const { playerName } = useParams();
+  const onSubmit = (data) => {
+    setLimit(data.target.value);
+  };
   const colors = [
     "#9ebdeb",
     "#91ddb0",
@@ -36,17 +40,25 @@ const Graph = () => {
 
   useEffect(async () => {
     if (playerName) {
-      await axios(`/api/matches/${playerName}/${10}`).then((data) => {
+      await axios(`/api/matches/${playerName}/${limit}`).then((data) => {
         setGraphData(data.data.graphData);
         setComments(data.data.comments);
       });
     }
-  }, [playerName]);
+  }, [playerName, limit]);
 
   return (
     <div className="bg-gray-800 min-h-screen">
       {graphData && (
         <>
+          <select className="m-3" onChange={onSubmit} defaultValue={10}>
+            <option value={5}>Last 5 Matches</option>
+            <option value={10}>Last 10 Matches</option>
+            <option value={25}>Last 25 Matches</option>
+            <option value={50}>Last 50 Matches</option>
+            <option value={100}>Last 100 Matches</option>
+            <option value={"all"}>All Matches</option>
+          </select>
           <ResponsiveContainer width="100%" height={400}>
             <PieChart>
               <Pie dataKey="value" data={graphData} stroke="">
