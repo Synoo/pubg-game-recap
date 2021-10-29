@@ -18,7 +18,10 @@ const Header = () => {
 
   return (
     <div className="bg-gray-900 flex">
-      <Link to="/" className="text-3xl text-green-300 py-5 pl-20 pr-20">
+      <Link
+        to={`/${playerName}`}
+        className="text-3xl text-green-300 py-5 pl-20 pr-20"
+      >
         PUBG Game Recap
       </Link>
       <Link to={`/${playerName}`} className="text-green-300 p-7">
