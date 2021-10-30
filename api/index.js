@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
-const matches = require("./api/matches");
-const players = require("./api/players");
+const matches = require("./routes/matches");
+const players = require("./routes/players");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
