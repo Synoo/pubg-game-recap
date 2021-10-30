@@ -5,7 +5,7 @@ require("dotenv").config();
 
 const headers = {
   Accept: "application/vnd.api+json",
-  Authorization: process.env.REACT_APP_API_KEY,
+  Authorization: process.env.PUBG_API_KEY,
 };
 
 exports.get = async (req, res) => {
