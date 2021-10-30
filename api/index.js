@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
-const matches = require("./api/matches");
-const players = require("./api/players");
+const matches = require("./routes/matches");
+const players = require("./routes/players");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -15,6 +15,9 @@ app.get("/api/players/:playerName", players.get);
 app.get("/api/matches/:playerName", matches.list);
 app.get("/api/matches/:playerName/:limit", matches.filteredList);
 app.put("/api/matches/:playerName/:matchId", matches.update);
+app.get("/api/test", (req, res) => {
+  res.send("TEST");
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
