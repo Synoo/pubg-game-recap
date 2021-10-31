@@ -1,5 +1,5 @@
 const app = require("express")();
-const db = require("../firebase");
+const db = require("../../firebase");
 
 app.get = async (req, res) => {
   const docRef = db.collection("players").doc(req.query.playerName);

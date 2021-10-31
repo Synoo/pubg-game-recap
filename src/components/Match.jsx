@@ -21,9 +21,11 @@ const MAP_SWITCH = {
 const Match = ({ match, playerName, onToast }) => {
   const { register, handleSubmit } = useForm({ defaultValues: match });
   const onSubmit = async (data) => {
-    await axios.put(`/api/matches/${playerName}/${match.id}`, data).then(() => {
-      onToast();
-    });
+    await axios
+      .put(`/api/players/${playerName}/matches/${match.id}`, data)
+      .then(() => {
+        onToast();
+      });
   };
   return (
     <div

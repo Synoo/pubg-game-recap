@@ -40,7 +40,7 @@ const Graph = () => {
 
   useEffect(async () => {
     if (playerName) {
-      await axios(`/api/matches/${playerName}/${limit}`).then((data) => {
+      await axios(`/api/players/${playerName}/limit/${limit}`).then((data) => {
         setGraphData(data.data.graphData);
         setComments(data.data.comments);
       });
