@@ -1,8 +1,7 @@
-require("dotenv").config();
-const players = require("express").Router();
+const app = require("express")();
 
-players.get = async (req, res) => {
-  res.send("HAHA");
-};
+app.get("/api/players/:playerName", async (req, res) => {
+  res.send("HAHA" + req.query.playerName);
+});
 
-module.exports = players;
+module.exports = app;
