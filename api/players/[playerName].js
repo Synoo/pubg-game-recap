@@ -1,4 +1,4 @@
-const db = require("../../firebase");
+const db = require("../firebase");
 const axios = require("axios");
 const _ = require("lodash");
 require("dotenv").config();
@@ -11,12 +11,12 @@ const headers = {
 
 players.get = async (req, res) => {
   const result = await axios(
-    `https://api.pubg.com/shards/steam/players?filter[playerNames]=${req.params.playerName}`,
+    `https://api.pubg.com/shards/steam/players?filter[playerNames]=${req.query.playerName}`,
     { headers }
   ).catch((err) => res.status(404).send("Player not found" + err));
 
   if (result.data) {
-    const playerRef = db.collection("players").doc(req.params.playerName);
+    const playerRef = db.collection("players").doc(req.query.playerName);
     const doc = await playerRef.get();
 
     if (!doc.exists) {
@@ -29,12 +29,12 @@ players.get = async (req, res) => {
       const orderedMatchesData = _.orderBy(matchesData, "createdAt", "desc");
 
       const playerData = {
-        playerName: req.params.playerName,
+        playerName: req.query.playerName,
         matches: orderedMatchesData,
       };
 
       db.collection("players")
-        .doc(req.params.playerName)
+        .doc(req.query.playerName)
         .set(playerData)
         .then(() => {
           res.status(200).send("Player successfully added!");
