@@ -2,16 +2,16 @@ const app = require("express")();
 const db = require("../firebase");
 
 app.get = async (req, res) => {
-  const docRef = db.collection("players").doc(req.params.playerName);
+  const docRef = db.collection("players").doc(req.query.playerName);
   docRef
     .get()
     .then((doc) => {
       if (doc.exists) {
         let filteredList;
-        if (req.params.limit === "all") {
+        if (req.query.limit === "all") {
           filteredList = doc.data().matches;
         } else {
-          filteredList = doc.data().matches.slice(0, req.params.limit);
+          filteredList = doc.data().matches.slice(0, req.query.limit);
         }
 
         const aim = [];
@@ -71,7 +71,7 @@ app.get = async (req, res) => {
 
         res.json(data);
       } else {
-        res.status(404).send(`No matches with name: ${req.params.playerName}`);
+        res.status(404).send(`No matches with name: ${req.query.playerName}`);
       }
     })
     .catch((error) => {
