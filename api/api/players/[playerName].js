@@ -1,4 +1,4 @@
-const db = require("../firebase");
+const db = require("../../firebase");
 const axios = require("axios");
 const _ = require("lodash");
 require("dotenv").config();
