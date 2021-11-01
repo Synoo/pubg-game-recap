@@ -2,7 +2,7 @@ const app = require("express")();
 const db = require("../firebase");
 const _ = require("lodash");
 
-app.put = async (req, res) => {
+app.put("/api/players/:playerName/matches/:matchId", async (req, res) => {
   const docRef = db.collection("players").doc(req.query.playerName);
   docRef
     .get()
@@ -33,6 +33,6 @@ app.put = async (req, res) => {
     .catch((error) => {
       res.status(500).send("Error getting matches data: ", error);
     });
-};
+});
 
 module.exports = app;

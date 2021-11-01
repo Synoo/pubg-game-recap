@@ -1,7 +1,7 @@
 const app = require("express")();
 const db = require("../../firebase");
 
-app.get = async (req, res) => {
+app.get("/api/players/:playerName/matches", async (req, res) => {
   const docRef = db.collection("players").doc(req.query.playerName);
   docRef
     .get()
@@ -15,6 +15,6 @@ app.get = async (req, res) => {
     .catch((error) => {
       res.status(500).send("Error getting matches data: ", error);
     });
-};
+});
 
 module.exports = app;
