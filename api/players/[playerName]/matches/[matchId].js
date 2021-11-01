@@ -1,5 +1,5 @@
 const app = require("express")();
-const db = require("../firebase");
+const db = require("../../../firebase");
 const _ = require("lodash");
 
 app.put("/api/players/:playerName/matches/:matchId", async (req, res) => {
