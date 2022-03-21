@@ -1,9 +1,21 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Match from "./Match";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Matches({ playerName, playerData }) {
+const Matches = () => {
+  const [playerData, setPlayerData] = useState({ matches: [] });
+  const { playerName } = useParams();
+
+  useEffect(async () => {
+    if (playerName) {
+      await axios(`/api/players/${playerName}/matches`).then((data) => {
+        setPlayerData(data.data);
+      });
+    }
+  }, [playerName]);
+
   const handleToast = () => {
     toast.success("Match is Updated!", { theme: "dark" });
   };
@@ -27,12 +39,6 @@ export default function Matches({ playerName, playerData }) {
       )}
     </div>
   );
-}
+};
 
-export async function getServerSideProps(context) {
-  const { playerName } = context.params;
-  const playerData = await axios(`/api/players/${playerName}/matches`).data;
-  return {
-    props: { playerName, playerData },
-  };
-}
+export default Matches;
