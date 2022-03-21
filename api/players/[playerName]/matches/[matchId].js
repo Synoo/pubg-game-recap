@@ -15,8 +15,6 @@ app.put("/api/players/:playerName/matches/:matchId", async (req, res) => {
         const newMatch = { ...match[0], ...req.body };
         console.log("REQUEST BODY" + JSON.stringify(req.body));
 
-        console.log("NEWMATCH" + JSON.stringify(newMatch));
-
         const oldMatches = matches.filter(
           (match) => match.id !== req.params.matchId
         );
@@ -28,6 +26,8 @@ app.put("/api/players/:playerName/matches/:matchId", async (req, res) => {
           "createdAt",
           "desc"
         );
+
+        console.log("orderedMatchesdata" + JSON.stringify(orderedMatchesData));
 
         const result = await docRef.update({ matches: orderedMatchesData });
         res
