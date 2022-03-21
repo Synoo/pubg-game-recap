@@ -27,8 +27,6 @@ app.put("/api/players/:playerName/matches/:matchId", async (req, res) => {
           "desc"
         );
 
-        console.log("orderedMatchesdata" + JSON.stringify(orderedMatchesData));
-
         const result = await docRef.update({ matches: orderedMatchesData });
         res
           .status(200)
