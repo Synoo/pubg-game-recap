@@ -3,6 +3,7 @@ const db = require("../../../firebase");
 const _ = require("lodash");
 
 app.put("/api/players/:playerName/matches/:matchId", async (req, res) => {
+  const { body } = req;
   const docRef = db.collection("players").doc(req.params.playerName);
   docRef
     .get()
@@ -12,8 +13,8 @@ app.put("/api/players/:playerName/matches/:matchId", async (req, res) => {
         const match = matches.filter(
           (match) => match.id === req.params.matchId
         );
-        const newMatch = { ...match[0], ...req.body };
-        console.log("REQUEST BODY" + JSON.stringify(req.body));
+        const newMatch = { ...match[0], ...body };
+        console.log("REQUEST BODY" + JSON.stringify(body));
 
         const oldMatches = matches.filter(
           (match) => match.id !== req.params.matchId
