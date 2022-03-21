@@ -23,11 +23,15 @@ app.put("/api/players/:playerName/matches/:matchId", async (req, res) => {
 
         const updateMatches = [...oldMatches, newMatch];
 
+        console.log("newmatch" + JSON.stringify(newMatch));
+
         const orderedMatchesData = _.orderBy(
           updateMatches,
           "createdAt",
           "desc"
         );
+
+        console.log("orderedMatchesdata" + JSON.stringify(orderedMatchesData));
 
         const result = await docRef.update({ matches: orderedMatchesData });
         res
