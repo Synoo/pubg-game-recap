@@ -14,7 +14,6 @@ app.put("/api/players/:playerName/matches/:matchId", async (req, res) => {
           (match) => match.id === req.params.matchId
         );
         const newMatch = { ...match[0], ...body };
-        console.log("REQUEST BODY" + JSON.stringify(body));
 
         const oldMatches = matches.filter(
           (match) => match.id !== req.params.matchId
