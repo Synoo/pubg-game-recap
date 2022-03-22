@@ -1,41 +1,43 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import axios from "axios";
 
 const Header = () => {
   const [playerName, setPlayerName] = useState("");
-  const history = useHistory();
+  const router = useRouter();
 
   const onEnter = async (e) => {
     if (e.key === "Enter") {
       if (playerName) {
-        await axios(`/api/players/${playerName}`);
+        await axios(
+          process.env.NEXT_PUBLIC_API_URL + `/api/players/${playerName}`
+        );
       }
 
-      const pathName = history.location.pathname;
+      const pathName = router.pathname;
       const substrPathName = pathName.substr(0, pathName.lastIndexOf("/"));
 
       if (substrPathName) {
-        history.push(`/graph/${playerName}`);
+        router.push(`/${playerName}/graph`);
       } else {
-        history.push(`/${playerName}`);
+        router.push(`/${playerName}`);
       }
     }
   };
 
   return (
     <div className="bg-gray-900 flex">
-      <Link
-        to={`/${playerName}`}
-        className="text-3xl text-green-300 py-5 pl-20 pr-20"
-      >
-        PUBG Game Recap
+      <Link href={`/${playerName}`}>
+        <a className="text-3xl text-green-300 py-5 pl-20 pr-20">
+          PUBG Game Recap
+        </a>
       </Link>
-      <Link to={`/${playerName}`} className="text-green-300 p-7">
-        Matches
+      <Link href={`/${playerName}`}>
+        <a className="text-green-300 p-7">Matches</a>
       </Link>
-      <Link to={`/graph/${playerName}`} className="text-green-300 p-7">
-        Graph
+      <Link href={`/${playerName}/graph`}>
+        <a className="text-green-300 p-7">Graph</a>
       </Link>
       <input
         className="bg-gray-800 h-10 m-5 rounded-xl text-green-300 placeholder-green-300 placeholder-opacity-50 border-none focus:outline-none p-5"
