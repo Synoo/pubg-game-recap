@@ -6,7 +6,7 @@ This project is made with React, Next.JS, Firebase and uses the PUBG API.
 
 This project can be used to track the amount of times you made a certain mistake in the last "X" games.
 
-In the following picture you can see how the website looks
+In the following picture you can see how the website looks.
 ![Overview Picture](public/Overview.png)
 
 In this picture it shows how to input your mistakes, add a comment and save them.
