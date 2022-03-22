@@ -1,5 +1,5 @@
 import axios from "axios";
-import Match from "./Match";
+import Match from "../../components/Match";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -31,7 +31,10 @@ export default function Matches({ playerName, playerData }) {
 
 export async function getServerSideProps(context) {
   const { playerName } = context.params;
-  const playerData = await axios(`/api/players/${playerName}/matches`).data;
+  const playerData = await axios(
+    `http://localhost:3000/api/players/${playerName}/matches`
+  ).then((data) => data.data);
+
   return {
     props: { playerName, playerData },
   };

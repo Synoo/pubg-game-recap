@@ -1,4 +1,3 @@
-import React from "react";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -22,7 +21,10 @@ const Match = ({ match, playerName, onToast }) => {
   const { register, handleSubmit } = useForm({ defaultValues: match });
   const onSubmit = async (data) => {
     await axios
-      .put(`/api/players/${playerName}/matches/${match.id}`, data)
+      .put(
+        `http://localhost:3000/api/players/${playerName}/matches/${match.id}`,
+        data
+      )
       .then(() => {
         onToast();
       });
