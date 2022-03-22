@@ -32,7 +32,7 @@ export default function Matches({ playerName, playerData }) {
 export async function getServerSideProps(context) {
   const { playerName } = context.params;
   const playerData = await axios(
-    `http://localhost:3000/api/players/${playerName}/matches`
+    process.env.NEXT_PUBLIC_API_URL + `players/${playerName}/matches`
   ).then((data) => data.data);
 
   return {
