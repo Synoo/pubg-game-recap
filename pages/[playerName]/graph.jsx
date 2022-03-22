@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useRouter } from "next/router";
 import {
   PieChart,
   Pie,
@@ -19,7 +19,9 @@ const Graph = () => {
   const [graphData, setGraphData] = useState();
   const [comments, setComments] = useState();
   const [limit, setLimit] = useState(10);
-  const { playerName } = useParams();
+  const router = useRouter();
+  const { playerName } = router.query;
+
   const onSubmit = (data) => {
     setLimit(data.target.value);
   };
@@ -40,7 +42,9 @@ const Graph = () => {
 
   useEffect(async () => {
     if (playerName) {
-      await axios(`/api/players/${playerName}/limit/${limit}`).then((data) => {
+      await axios(
+        `http://localhost:3000/api/players/${playerName}/${limit}`
+      ).then((data) => {
         setGraphData(data.data.graphData);
         setComments(data.data.comments);
       });

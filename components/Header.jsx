@@ -10,14 +10,14 @@ const Header = () => {
   const onEnter = async (e) => {
     if (e.key === "Enter") {
       if (playerName) {
-        await axios(`/api/players/${playerName}`);
+        await axios(`http://localhost:3000/api/players/${playerName}`);
       }
 
       const pathName = router.pathname;
       const substrPathName = pathName.substr(0, pathName.lastIndexOf("/"));
 
       if (substrPathName) {
-        router.push(`/graph/${playerName}`);
+        router.push(`/${playerName}/graph`);
       } else {
         router.push(`/${playerName}`);
       }
@@ -34,7 +34,7 @@ const Header = () => {
       <Link href={`/${playerName}`}>
         <a className="text-green-300 p-7">Matches</a>
       </Link>
-      <Link href={`/graph/${playerName}`}>
+      <Link href={`/${playerName}/graph`}>
         <a className="text-green-300 p-7">Graph</a>
       </Link>
       <input
