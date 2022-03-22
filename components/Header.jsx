@@ -10,7 +10,7 @@ const Header = () => {
   const onEnter = async (e) => {
     if (e.key === "Enter") {
       if (playerName) {
-        await axios(`http://localhost:3000/api/players/${playerName}`);
+        await axios(process.env.NEXT_PUBLIC_API_URL + `players/${playerName}`);
       }
 
       const pathName = router.pathname;

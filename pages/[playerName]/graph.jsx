@@ -43,7 +43,7 @@ const Graph = () => {
   useEffect(async () => {
     if (playerName) {
       await axios(
-        `http://localhost:3000/api/players/${playerName}/${limit}`
+        process.env.NEXT_PUBLIC_API_URL + `players/${playerName}/${limit}`
       ).then((data) => {
         setGraphData(data.data.graphData);
         setComments(data.data.comments);

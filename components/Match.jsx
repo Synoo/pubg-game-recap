@@ -22,7 +22,7 @@ const Match = ({ match, playerName, onToast }) => {
   const onSubmit = async (data) => {
     await axios
       .put(
-        `http://localhost:3000/api/players/${playerName}/matches/${match.id}`,
+        process.env.NEXT_PUBLIC_API_URL + `players/${playerName}/matches/${match.id}`,
         data
       )
       .then(() => {
