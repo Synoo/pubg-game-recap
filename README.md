@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# PUBG Game Recap
 
 This project is made with React, Next.JS, Firebase and uses the PUBG API.
 
