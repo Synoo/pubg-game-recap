@@ -1,3 +1,5 @@
+import { getSession } from "next-auth/client";
+
 const db = require("../../firebase");
 const axios = require("axios");
 const _ = require("lodash");
@@ -8,6 +10,16 @@ const headers = {
 };
 
 export default async function handler(req, res) {
+  const session = await getSession({
+    req,
+  });
+
+  if (!session) {
+    res.status(401).json({
+      error: "Unauthenticated user",
+    });
+  }
+
   const result = await axios(
     `https://api.pubg.com/shards/steam/players?filter[playerNames]=${req.query.playerName}`,
     { headers }
