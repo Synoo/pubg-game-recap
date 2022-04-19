@@ -15,7 +15,10 @@ const Header = () => {
     if (e.key === "Enter") {
       if (playerName) {
         await axios(
-          process.env.NEXT_PUBLIC_API_URL + `/api/players/${playerName}`
+          process.env.NEXT_PUBLIC_API_URL + `/api/players/${playerName}`,
+          {
+            headers: { Cookie: session },
+          }
         );
       }
 

@@ -14,6 +14,9 @@ export default async function handler(req, res) {
     req,
   });
 
+  console.log("hallo");
+  console.log(session);
+
   if (!session) {
     res.status(401).json({
       error: "Unauthenticated user",
