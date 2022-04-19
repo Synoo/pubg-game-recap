@@ -15,7 +15,9 @@ export default async function handler(req, res) {
   }
 
   const { body } = req;
-  const docRef = db.collection("players").doc(req.query.playerName);
+  const docRef = db
+    .collection("players")
+    .doc(`${session.user.email}-${req.query.playerName}`);
   docRef
     .get()
     .then(async (doc) => {
