@@ -12,6 +12,7 @@ const headers = {
 export default async function handler(req, res) {
   console.log("kom ik hier");
   console.log(process.env);
+  console.log("BROEKIE" + process.env.NEXTAUTH_URL);
   const session = await getSession({
     req,
   });
