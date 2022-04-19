@@ -4,6 +4,7 @@ import { FirebaseAdapter } from "@next-auth/firebase-adapter";
 import firebase from "../firebase";
 
 export default NextAuth({
+  site: process.env.NEXTAUTH_URL,
   providers: [
     Providers.Discord({
       clientId: process.env.DISCORD_CLIENT_ID,
