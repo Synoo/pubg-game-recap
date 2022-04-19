@@ -11,13 +11,13 @@ const headers = {
 
 export default async function handler(req, res) {
   console.log("kom ik hier");
-  console.log(req);
+  console.log(process.env);
   const session = await getSession({
     req,
   });
 
-  console.log("hallo");
-  console.log(session);
+  // console.log("hallo");
+  // console.log(session);
 
   if (!session) {
     res.status(401).json({
