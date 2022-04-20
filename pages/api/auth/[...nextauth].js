@@ -5,7 +5,7 @@ import firebase from "../firebase";
 
 console.log(process.env.NEXTAUTH_SECRET);
 export default NextAuth({
-  site: process.env.NEXTAUTH_URL,
+  site: process.env.NEXT_PUBLIC_API_URL,
   providers: [
     Providers.Discord({
       clientId: process.env.DISCORD_CLIENT_ID,
