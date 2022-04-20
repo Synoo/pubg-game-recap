@@ -29,7 +29,7 @@ export default async function handler(req, res) {
   if (result.data) {
     const playerRef = db
       .collection("players")
-      .doc(`${session.user.email}-${req.query.playerName}`);
+      .doc(`${session.user?.email}-${req.query.playerName}`);
     const doc = await playerRef.get();
 
     if (!doc.exists) {
@@ -47,7 +47,7 @@ export default async function handler(req, res) {
       };
 
       db.collection("players")
-        .doc(`${session.user.email}-${req.query.playerName}`)
+        .doc(`${session.user?.email}-${req.query.playerName}`)
         .set(playerData)
         .then(() => {
           res.status(200).send("Player successfully added!");
