@@ -1,3 +1,5 @@
+import { getSession } from "next-auth/client";
+
 const db = require("../../firebase");
 const axios = require("axios");
 const _ = require("lodash");
@@ -8,13 +10,25 @@ const headers = {
 };
 
 export default async function handler(req, res) {
+  const session = await getSession({
+    req,
+  });
+
+  if (!session) {
+    res.status(401).json({
+      error: "Unauthenticated user",
+    });
+  }
+
   const result = await axios(
     `https://api.pubg.com/shards/steam/players?filter[playerNames]=${req.query.playerName}`,
     { headers }
   ).catch((err) => res.status(404).send("Player not found" + err));
 
   if (result.data) {
-    const playerRef = db.collection("players").doc(req.query.playerName);
+    const playerRef = db
+      .collection("players")
+      .doc(`${session.user?.email}-${req.query.playerName}`);
     const doc = await playerRef.get();
 
     if (!doc.exists) {
@@ -32,7 +46,7 @@ export default async function handler(req, res) {
       };
 
       db.collection("players")
-        .doc(req.query.playerName)
+        .doc(`${session.user?.email}-${req.query.playerName}`)
         .set(playerData)
         .then(() => {
           res.status(200).send("Player successfully added!");

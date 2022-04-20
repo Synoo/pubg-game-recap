@@ -14,6 +14,7 @@ import {
   YAxis,
   CartesianGrid,
 } from "recharts";
+import { useSession } from "next-auth/client";
 
 const Graph = () => {
   const [graphData, setGraphData] = useState();
@@ -21,6 +22,7 @@ const Graph = () => {
   const [limit, setLimit] = useState(10);
   const router = useRouter();
   const { playerName } = router.query;
+  const [session, loading] = useSession();
 
   const onSubmit = (data) => {
     setLimit(data.target.value);
@@ -40,16 +42,37 @@ const Graph = () => {
     "#c5d4cf",
   ];
 
-  useEffect(async () => {
-    if (playerName) {
-      await axios(
-        process.env.NEXT_PUBLIC_API_URL + `/api/players/${playerName}/${limit}`
-      ).then((data) => {
-        setGraphData(data.data.graphData);
-        setComments(data.data.comments);
-      });
+  useEffect(() => {
+    async function fetchData() {
+      if (playerName) {
+        await axios(
+          process.env.NEXT_PUBLIC_API_URL +
+            `/api/players/${playerName}/${limit}`
+        ).then((data) => {
+          setGraphData(data.data.graphData);
+          setComments(data.data.comments);
+        });
+      }
     }
-  }, [playerName, limit]);
+
+    if (session) {
+      fetchData();
+    }
+  }, [playerName, limit, session]);
+
+  if (loading) {
+    return (
+      <div className="bg-gray-800 min-h-screen p-5 text-green-300">Loading</div>
+    );
+  }
+
+  if (!session) {
+    return (
+      <div className="bg-gray-800 min-h-screen p-5 text-green-300">
+        Access Denied
+      </div>
+    );
+  }
 
   return (
     <div className="bg-gray-800 min-h-screen">
