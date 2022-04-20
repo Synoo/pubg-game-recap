@@ -9,7 +9,7 @@ import { faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   const [session] = useSession();
   const router = useRouter();
-  const [playerName, setPlayerName] = useState(router.query.playerName);
+  const [playerName, setPlayerName] = useState("");
 
   const onEnter = async (e) => {
     if (e.key === "Enter") {
