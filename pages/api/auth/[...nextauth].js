@@ -3,9 +3,8 @@ import Providers from "next-auth/providers";
 import { FirebaseAdapter } from "@next-auth/firebase-adapter";
 import firebase from "../firebase";
 
-console.log(process.env.NEXTAUTH_SECRET);
 export default NextAuth({
-  site: process.env.NEXT_PUBLIC_API_URL,
+  site: process.env.NEXTAUTH_URL,
   providers: [
     Providers.Discord({
       clientId: process.env.DISCORD_CLIENT_ID,

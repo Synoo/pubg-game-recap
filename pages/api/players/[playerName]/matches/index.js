@@ -2,13 +2,10 @@ const db = require("../../../firebase");
 import { getSession } from "next-auth/client";
 
 export default async function handler(req, res) {
-  console.log("matches ophalen");
   const session = await getSession({
     req,
   });
 
-  console.log(session);
-  console.log("USER" + JSON.stringify(session.user));
   if (!session) {
     res.status(401).json({
       error: "Unauthenticated user",

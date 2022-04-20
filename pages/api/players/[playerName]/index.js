@@ -10,7 +10,6 @@ const headers = {
 };
 
 export default async function handler(req, res) {
-  console.log("ENTER SEARCHBAR");
   const session = await getSession({
     req,
   });
