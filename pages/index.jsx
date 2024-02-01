@@ -9,7 +9,7 @@ function Home() {
       <p className="text-green-300 absolute bottom-0 left-0 h-32 w-64 p-5">
         Contact Information:
         <ul>
-          <li>Discord: Synoo#8796</li>
+          <li>Discord: Synoo#8796test</li>
           <li>
             <Link href="https://github.com/Synoo/pubg-game-recap">
               <a className="hover:text-green-200 underline">Github: Synoo</a>
